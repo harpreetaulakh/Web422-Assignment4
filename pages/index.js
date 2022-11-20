@@ -10,7 +10,6 @@
  ********************************************************************************/
 
  import { Col, Image, Row } from "react-bootstrap";
-
  export default function Home() {
    return (
      <>

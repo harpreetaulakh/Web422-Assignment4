@@ -5,6 +5,8 @@ import { Col, Pagination, Row } from "react-bootstrap";
 import useSWR from "swr";
 import ArtworkCard from "../../components/ArtworkCard";
 import { fetcher } from "../../fetcher";
+import validObjectIDList from '../../public/data/validObjectIDList.json'
+
 const PER_PAGE = 12;
 
 function Artwork() {
@@ -27,8 +29,10 @@ function Artwork() {
   useEffect(() => {
     if (!data) return;
     const results = [];
-    for (let i = 0; i < data?.objectIDs?.length; i += PER_PAGE) {
-      const chunk = data?.objectIDs.slice(i, i + PER_PAGE);
+    let filteredResults = validObjectIDList.objectIDs.filter(x => data.objectIDs?.includes(x));
+
+    for (let i = 0; i < filteredResults.length; i += PER_PAGE) {
+      const chunk = filteredResults.slice(i, i + PER_PAGE);
       results.push(chunk);
     }
     setArtworkList(results);
